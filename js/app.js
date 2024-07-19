@@ -1,20 +1,18 @@
 const pintarProductos = () => {
+    
     const contenedor = document.querySelector('.box-container');
     
     productos.forEach(producto => {
         const div = document.createElement('div');
-        div.className = 'box';
+        div.className = 'box card col-3';
 
         div.innerHTML = `
-        <div class="image">
-            <img src="${producto.img}">
-            <div class="icons">
-                <button class="cart-btn" onclick="addToCart(${producto.id})">Agregar al carrito</button>
+            <img class="card-img-top" src="${producto.img}">
+            <div class="content card-body">
+            <h2 class="price card-title">$ ${producto.precio}</h2>
+            <p class="card-text">${producto.descripcion}</p>
+            <button class="cart-btn btn btn-primary" onclick="addToCart(${producto.id})">Agregar al carrito</button>
             </div>
-        </div>
-        <div class="content">
-            <h3>${producto.descripcion}</h3>
-            <div class="price">$ ${producto.precio}</div>
         </div>
         `
 
@@ -49,5 +47,20 @@ const addToCart = (productoId) => {
     carrito.push(producto);
 
     localStorage.setItem('carrito', JSON.stringify(carrito));
-    alert('Producto añadido al carrito');
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 1500,
+        timeProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+    Toast.fire({
+        icon: 'success',
+        title: 'El producto se agregó al carrito'
+    })
 };
