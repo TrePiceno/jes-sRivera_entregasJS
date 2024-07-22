@@ -91,18 +91,3 @@ const productos =
     }
 
 ];
-
-const getProducts = () => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(productos);
-        }, 3000);
-    });
-};
-
-getProducts()
-    .then((productos) => {
-    console.log(productos);})
-    .catch((error) => {
-        console.log(error);
-    });

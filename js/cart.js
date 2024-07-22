@@ -10,13 +10,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     carrito.forEach(producto => {
         const div = document.createElement('div');
-        div.className = 'cart-item card';
+        div.className = 'cart-item card col-xl-4 col-lg-6';
 
         div.innerHTML = `
-            <img class="card-img-top" src="${producto.img}" alt="${producto.descripcion}">
+            <img class="card-img-top" src="${producto.img}">
+            <div class="content card-body">
             <p class="card-text">${producto.descripcion}</p>
             <h2 class="card-title">Precio: $ ${producto.precio}</h2>
             <button class="btn btn-primary" onclick="removeFromCart(${producto.id})">Eliminar</button>
+            </div>
+        </div>
         `;
 
         cartContainer.appendChild(div);
